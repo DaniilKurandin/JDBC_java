@@ -1,26 +1,39 @@
-package JDBC_homework_task1;
-import java.sql.*;
+package JDBC_java.JDBC_homework_dop_task;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Main {
-
     private static final String URL = "jdbc:mysql://localhost:3306/MyJoinsDB";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "9IOLWZKDn";
 
-    public static void main(String[] args) {
+    private static final String DELETE = "DELETE FROM testdb WHERE id = ?";
+    private static final String SELECT = "SELECT person FROM testdb WHERE id = ?";
+    private static final String UPDATE = "UPDATE person SET name = 'TestNew' WHERE id = ?";
 
+    public static void main(String[] args) {
         registerDriver();
 
         Connection connection = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
 
         try {
             connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
-            statement = connection.createStatement();
 
-            ResultSet set1 = statement.executeQuery("SELECT telephone, address FROM data INNER JOIN personal ON data.id = personal.id_data");
-            ResultSet set2 = statement.executeQuery("SELECT telephone, birthday FROM data INNER JOIN personal on data.id = personal.id_data WHERE marital_status = 'not married'");
-            ResultSet set3 = statement.executeQuery("SELECT birthday, telephone FROM personal INNER JOIN post on post.id = personal.id_post INNER JOIN data on data.id = personal.id_data WHERE post.id = 1");
+            statement = connection.prepareStatement(SELECT);
+
+            statement.setInt(1, 1);
+
+            statement = connection.prepareStatement(UPDATE);
+
+            statement.setInt(1, 1);
+
+            statement = connection.prepareStatement(DELETE);
+
+            statement.setInt(1, 1);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -32,7 +45,6 @@ public class Main {
                 throwables.printStackTrace();
             }
         }
-
     }
 
     private static void registerDriver() {
