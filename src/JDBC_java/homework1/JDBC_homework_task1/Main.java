@@ -1,4 +1,4 @@
-package JDBC_java.JDBC_homework_task1;
+package JDBC_java.homework1.JDBC_homework_task1;
 import java.sql.*;
 
 public class Main {

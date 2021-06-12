@@ -1,4 +1,4 @@
-package JDBC_java.JDBC_homework_dop_task;
+package JDBC_java.homework1.JDBC_homework_dop_task;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
